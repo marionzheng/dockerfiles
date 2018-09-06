@@ -1,12 +1,15 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
 
-# Test binary, build with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+out/
+build/
+.gradle/
+.idea/
+.ideaDataSources/
+.DS_Store
+.git
+yowootech-entity.iws
+*/*.iml
+*.iml
+*.ipr
+*.iws
