@@ -11,7 +11,7 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repo
     && echo -ne "1       0       *       *       *       /zk_data_clean.sh" >> /var/spool/cron/crontabs/root \
     && crond
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/docker-entrypoint.sh", "zkServer.sh", "start-foreground"]
 
 # zookeeper image default env values:
 # ZOO_DATA_LOG_DIR = /datalog
