@@ -8,6 +8,7 @@ RUN mkdir -p /opt /data/kafka /conf \
     && mv -f ./kafka_2.11-2.0.0 /opt/ \
     && ln -sf /opt/kafka_2.11-2.0.0 /opt/kafka \
     && rm -rf ./kafka_2.11-2.0.0.tgz \
+    && cp -rf /opt/kafka/config/server.properties /conf/ \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
     && apk --update add openjdk8-jre bash tzdata \
@@ -18,6 +19,6 @@ ENV LANG C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka/bin
 ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_DATA_DIR /data/kafka
-ENV KAFKA_CONF_DIR /opt/kafka/config
+ENV KAFKA_CONF_DIR /conf
 
-CMD ["./kafka-server-start.sh", "$KAFKA_CONF_DIR/server.properties"]
+CMD ["./kafka-server-start.sh", "/conf/server.properties"]
