@@ -20,5 +20,7 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/kafka
 ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_DATA_DIR /data/kafka
 ENV KAFKA_CONF_DIR /conf
+EXPOSE 9092
+EXPOSE 2181
 
 CMD ["./kafka-server-start.sh", "/conf/server.properties"]
