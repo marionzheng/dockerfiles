@@ -10,6 +10,9 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repo
     && chmod +x ./zk_data_clean.sh \
     && echo -ne "1       0       *       *       *       /zk_data_clean.sh" >> /var/spool/cron/crontabs/root \
     && crond
+EXPOSE 2181
+EXPOSE 2888
+EXPOSE 3888
 
 ENTRYPOINT ["/docker-entrypoint.sh", "zkServer.sh", "start-foreground"]
 
