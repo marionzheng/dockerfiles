@@ -2,7 +2,7 @@ FROM alpine
 MAINTAINER Marion "trboyspace@126.com"
 
 WORKDIR /
-RUN mkdir -p /opt /data/kafka \
+RUN mkdir -p /opt /data/kafka /conf \
     && wget http://mirrors.shu.edu.cn/apache/kafka/2.0.0/kafka_2.11-2.0.0.tgz \
     && tar -zxvf ./kafka_2.11-2.0.0.tgz \
     && mv -f ./kafka_2.11-2.0.0 /opt/ \
@@ -20,4 +20,4 @@ ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_DATA_DIR /data/kafka
 ENV KAFKA_CONF_DIR /opt/kafka/config
 
-CMD ["/opt/kafka/bin/kafka-server-start.sh", "/opt/kafka/config/server.properties"]
+CMD ["./kafka-server-start.sh", "$KAFKA_CONF_DIR/server.properties"]
