@@ -2,9 +2,12 @@
 
 set -e
 
+sleep 2s
+
 if [ -f "$KAFKA_CONF_DIR/server.properties" ]; then
     mv -f "$KAFKA_HOME/config/server.properties" "$KAFKA_HOME/config/server.properties.bak"
     cp "$KAFKA_CONF_DIR/server.properties" "$KAFKA_HOME/config/server.properties"
+    sleep 2s
 fi
 
 sed -i "s/broker.id=0/broker.id=$KAFKA_BROKER_ID/g" $KAFKA_HOME/config/server.properties
