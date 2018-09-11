@@ -9,7 +9,8 @@ RUN mkdir -p /opt /data/kafka /conf \
     && tar -zxvf ./kafka_2.11-2.0.0.tgz \
     && mv -f ./kafka_2.11-2.0.0 /opt/ \
     && ln -sf /opt/kafka_2.11-2.0.0 /opt/kafka \
-    && rm -rf ./kafka_2.11-2.0.0.tgz
+    && rm -rf ./kafka_2.11-2.0.0.tgz \
+    && cp /opt/kafka/config/server.properties /conf/
 WORKDIR /opt/kafka/bin/
 ENV LANG C.UTF-8
 ENV KAFKA_HOME /opt/kafka
@@ -20,4 +21,4 @@ ENV KAFKA_HOST_NAME localhost
 ENV ZOO_CONNECT localhost:2181
 EXPOSE 9092
 
-CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/opt/kafka/config/server.properties"]
+CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/conf/server.properties"]
