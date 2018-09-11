@@ -3,7 +3,7 @@ MAINTAINER Marion "trboyspace@126.com"
 
 WORKDIR /
 COPY ./kafka/docker-entrypoint.sh .
-RUN mkdir -p /opt /data/kafka \
+RUN mkdir -p /opt /data/kafka /conf \
     && chmod a+x /docker-entrypoint.sh \
     && wget http://mirrors.shu.edu.cn/apache/kafka/2.0.0/kafka_2.11-2.0.0.tgz \
     && tar -zxvf ./kafka_2.11-2.0.0.tgz \
@@ -18,7 +18,7 @@ WORKDIR /opt/kafka/bin/
 ENV LANG C.UTF-8
 ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_DATA_DIR /data/kafka
-ENV KAFKA_CONF_DIR /opt/kafka/config
+ENV KAFKA_CONF_DIR /conf
 ENV KAFKA_BROKER_ID 0
 ENV KAFKA_HOST_NAME localhost
 ENV ZOO_CONNECT localhost:2181
