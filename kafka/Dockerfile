@@ -15,11 +15,13 @@ RUN mkdir -p /opt /data/kafka \
     && apk --update add openjdk8-jre bash tzdata \
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 WORKDIR /opt/kafka/bin/
+ENV LANG C.UTF-8
 ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_DATA_DIR /data/kafka
 ENV KAFKA_CONF_DIR /opt/kafka/config
-ENV BROKER_ID 0
-ENV ZK_CONNECT localhost:2181
+ENV KAFKA_BROKER_ID 0
+ENV KAFKA_HOST_NAME localhost
+ENV ZOO_CONNECT localhost:2181
 EXPOSE 9092
 
 CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/opt/kafka/config/server.properties"]
