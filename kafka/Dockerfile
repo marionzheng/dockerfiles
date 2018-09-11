@@ -1,4 +1,4 @@
-FROM java
+FROM alpine
 MAINTAINER Marion "trboyspace@126.com"
 
 WORKDIR /
@@ -10,7 +10,10 @@ RUN mkdir -p /opt /data/kafka /conf \
     && mv -f ./kafka_2.11-2.0.0 /opt/ \
     && ln -sf /opt/kafka_2.11-2.0.0 /opt/kafka \
     && rm -rf ./kafka_2.11-2.0.0.tgz \
-    && cp /opt/kafka/config/server.properties /conf/
+    && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
+    && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
+    && apk --update add openjdk8-jre bash tzdata \
+    && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 WORKDIR /opt/kafka/bin/
 ENV LANG C.UTF-8
 ENV KAFKA_HOME /opt/kafka
@@ -21,4 +24,4 @@ ENV KAFKA_HOST_NAME localhost
 ENV ZOO_CONNECT localhost:2181
 EXPOSE 9092
 
-CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/conf/server.properties"]
+CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/opt/kafka/config/server.properties"]
