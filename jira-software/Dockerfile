@@ -13,6 +13,7 @@ RUN wget https://product-downloads.atlassian.com/software/jira/downloads/atlassi
     && chmod -R u=rwx,go-rwx /opt/atlassian/jira/ \
     && chmod -R u=rwx,go-rwx /var/atlassian/application-data/jira/ \
     && sed -i "s#^jira.home.*#jira.home=/var/atlassian/application-data/jira/#g" /opt/atlassian/jira/atlassian-jira/WEB-INF/classes/jira-application.properties \
+    && echo "jira.websudo.is.disabled = true" > /var/atlassian/application-data/jira/jira-config.properties \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
     && apk --update add bash tzdata \
