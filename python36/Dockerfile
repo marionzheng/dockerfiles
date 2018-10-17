@@ -4,7 +4,7 @@ MAINTAINER marion "zhengyi@wanpinghui.com"
 RUN mkdir -p /root/.pip \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
-    && apk --update add curl tcpdump strace bash tree tzdata musl-dev gcc g++ python3 python3-dev vim supervisor \
+    && apk --update add curl tcpdump strace bash tree tzdata musl-dev gcc g++ python3 python3-dev vim \
     && echo "alias python='python3'" >  /root/.bash_profile \
     && echo "alias pip='pip3'" >>  /root/.bash_profile \
     && source /root/.bash_profile \
