@@ -16,13 +16,15 @@ RUN wget https://product-downloads.atlassian.com/software/jira/downloads/atlassi
     && echo "jira.websudo.is.disabled = true" > /var/atlassian/application-data/jira/jira-config.properties \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
-    && apk --update add bash tzdata \
-    && apk --no-cache add ca-certificates tini \
+    && apk update \
+    && apk --update --no-cache add bash tzdata ca-certificates tini \
     && apk add glibc-2.28-r0.apk \
+    && rm -rf /var/cache/apk/* \
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY ./jira-software/mysql-connector-java-5.1.46.jar /opt/atlassian/jira/lib/
 WORKDIR /opt/atlassian/jira/bin/
 ENV LANG C.UTF-8
+ENV PATH $PATH:/opt/atlassian/jira/bin:/sbin
 ENV JAVA_HOME /usr/local/jdk1.8.0_181
 ENV JIRA_HOME /var/atlassian/application-data/jira/
 ENV JVM_MINIMUM_MEMORY 1024m
@@ -30,5 +32,5 @@ ENV JVM_MAXIMUM_MEMORY 1024m
 EXPOSE 8080
 EXPOSE 8005
 
-ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
+ENTRYPOINT ["tini", "--"]
+CMD ["start-jira.sh", "-fg"]

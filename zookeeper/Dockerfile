@@ -5,7 +5,9 @@ WORKDIR /
 COPY ./zookeeper/zk_data_clean.sh .
 RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
-    && apk --update add tzdata \
+    && apk update \
+    && apk --update --no-cache add tzdata \
+    && rm -rf /var/cache/apk/* \
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && chmod +x ./zk_data_clean.sh \
     && echo -ne "1       0       *       *       *       /zk_data_clean.sh" >> /var/spool/cron/crontabs/root \
@@ -15,7 +17,8 @@ EXPOSE 2181
 EXPOSE 2888
 EXPOSE 3888
 
-ENTRYPOINT ["/docker-entrypoint.sh", "zkServer.sh", "start-foreground"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["zkServer.sh", "start-foreground"]
 
 # zookeeper image default env values:
 # ZOO_DATA_LOG_DIR = /datalog

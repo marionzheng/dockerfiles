@@ -12,10 +12,13 @@ RUN mkdir -p /opt /data/kafka /conf \
     && rm -rf ./kafka_2.11-2.0.0.tgz \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
-    && apk --update add openjdk8-jre bash tzdata \
+    && apk update \
+    && apk --update --no-cache add openjdk8-jre bash tzdata tini \
+    && rm -rf /var/cache/apk/* \
     && cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 WORKDIR /opt/kafka/bin/
 ENV LANG C.UTF-8
+ENV PATH $PATH:/opt/kafka/bin:/sbin
 ENV KAFKA_HOME /opt/kafka
 ENV KAFKA_CONF_DIR /conf
 ENV KAFKA_LOG_DIRS /data/kafka
@@ -23,4 +26,5 @@ ENV KAFKA_BROKER_ID -1
 ENV KAFKA_ZOOKEEPER_CONNECT localhost:2181
 EXPOSE 9092
 
-CMD ["/docker-entrypoint.sh", "/opt/kafka/bin/kafka-server-start.sh", "/opt/kafka/config/server.properties"]
+ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+CMD ["kafka-server-start.sh", "/opt/kafka/config/server.properties"]
