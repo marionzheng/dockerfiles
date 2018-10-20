@@ -1,7 +1,9 @@
 FROM alpine
 MAINTAINER marion "zhengyi@wanpinghui.com"
 
-COPY ./python36/py_requirements.txt /
+WORKDIR /
+COPY ./python36/py_requirements.txt .
+COPY ./python36/docker-entrypoint.sh .
 RUN mkdir -p /root/.pip \
     && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
@@ -25,8 +27,13 @@ RUN mkdir -p /root/.pip \
     #python-debian python-systemd ssh-import-id stevedore \
     && pip3 install -r /py_requirements.txt \
     && rm -rf /py_requirements.txt \
+    && chmod a+x /docker-entrypoint.sh \
     && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo -ne "Python project latest image." >> /root/.built
-WORKDIR /root/
+ENV LANG C.UTF-8
+ENV LOG_HOME /var/log
+EXPOSE 8080
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/conf/supervisor/supervisord.conf"]
+#CMD ["/bin/bash"]
