@@ -25,6 +25,8 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     && npm install cnpm -g --registry=https://registry.npm.taobao.org \
     && cnpm install -g gulp webpack vue-cli \
     && echo > echo > echo > ssh-keygen -t rsa -C "CI" \
+    && mv /root/.ssh/id_rsa* /var/jenkins_home/ \
+    && export GOPATH=/var/jenkins_home/go \
     && git clone https://github.com/golang/net.git /var/jenkins_home/go/src/golang.org/x/net \
     && git clone https://github.com/golang/text.git /var/jenkins_home/go/src/golang.org/x/text \
     && git clone https://github.com/golang/tools.git /var/jenkins_home/go/src/golang.org/x/tools \
