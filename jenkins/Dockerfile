@@ -18,9 +18,9 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     && apk --update --no-cache add curl tcpdump strace bash bash-completion tree tzdata libxslt libxslt-dev gd gd-dev \
     musl-dev make gcc g++ libffi-dev openssl openssl-dev build-base jpeg-dev zlib-dev geoip geoip-dev pcre pcre-dev \
     linux-headers libstdc++ libgcc patch logrotate inotify-tools vim tini go nodejs nodejs-npm ca-certificates wget \
-    openjdk8-jre font-adobe-100dpi ttf-dejavu fontconfig python python-dev git \
+    openjdk8-jre font-adobe-100dpi ttf-dejavu fontconfig python python-dev git openssh \
     && apk add /glibc-2.28-r0.apk \
-    && rm -rf ./jenkins.war /etc/apk/repositories /glibc-2.28-r0.apk ./apache-maven-3.5.4-bin.zip ./gradle-3.5.1-bin.zip ./gradle-4.10.2-bin.zip \
+    && rm -rf ./jenkins.war /glibc-2.28-r0.apk ./apache-maven-3.5.4-bin.zip ./gradle-3.5.1-bin.zip ./gradle-4.10.2-bin.zip \
     # && npm config set registry http://registry.npm.taobao.org/ \
     # && npm install cnpm -g --registry=https://registry.npm.taobao.org \
     # && cnpm install -g gulp webpack vue-cli \
