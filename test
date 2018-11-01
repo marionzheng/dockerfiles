@@ -1,0 +1,1 @@
+docker run -u root -d --privileged=true --restart=always --name="wph_ci" -p 8040:8080 -v /usr/local/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock ccr.ccs.tencentyun.com/wanpinghui/jenkins java -Duser.home=/var/jenkins_home -jar /var/jenkins_home/jenkins.war
