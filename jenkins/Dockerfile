@@ -7,7 +7,7 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     && wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip \
     && wget https://downloads.gradle.org/distributions/gradle-3.5.1-bin.zip \
     && wget https://downloads.gradle.org/distributions/gradle-4.10.2-bin.zip \
-    && mkdir -p /var/jenkins_home /var/logs/jenkins /jenkins /go \
+    && mkdir -p /var/jenkins_home /var/logs/jenkins /jenkins /go /opt/jenkins \
     && cp "./jenkins.war" -d /opt/jenkins/ \
     && unzip "./apache-maven-3.5.4-bin.zip" -d /jenkins/ \
     && unzip "./gradle-3.5.1-bin.zip" -d /jenkins/ \
