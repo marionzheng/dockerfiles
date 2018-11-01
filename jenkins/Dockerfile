@@ -21,9 +21,9 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     openjdk8-jre font-adobe-100dpi ttf-dejavu fontconfig python python-dev git \
     && apk add /glibc-2.28-r0.apk \
     && rm -rf ./jenkins.war /etc/apk/repositories /glibc-2.28-r0.apk ./apache-maven-3.5.4-bin.zip ./gradle-3.5.1-bin.zip ./gradle-4.10.2-bin.zip \
-    && npm config set registry http://registry.npm.taobao.org/ \
-    && npm install cnpm -g --registry=https://registry.npm.taobao.org \
-    && cnpm install -g gulp webpack vue-cli \
+    # && npm config set registry http://registry.npm.taobao.org/ \
+    # && npm install cnpm -g --registry=https://registry.npm.taobao.org \
+    # && cnpm install -g gulp webpack vue-cli \
     && export GOPATH=/go \
     && git clone https://github.com/golang/net.git /go/src/golang.org/x/net \
     && git clone https://github.com/golang/text.git /go/src/golang.org/x/text \
