@@ -2,6 +2,7 @@ FROM redis
 MAINTAINER Marion "trboyspace@126.com"
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && rm -rf /proc/sys/net/core/somaxconn \
     && echo 65535 > /proc/sys/net/core/somaxconn
 WORKDIR /usr/local/bin/
 EXPOSE 6379
