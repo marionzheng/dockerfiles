@@ -7,7 +7,7 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     && wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip \
     && wget https://downloads.gradle.org/distributions/gradle-3.5.1-bin.zip \
     && wget https://downloads.gradle.org/distributions/gradle-4.10.2-bin.zip \
-    && mkdir -p /var/jenkins_home /var/logs/jenkins /jenkins /go /opt/jenkins \
+    && mkdir -p /var/jenkins_home /var/logs/jenkins /jenkins /go /opt/jenkins /go/src/git.wanpinghui.com/WPH \
     && cp "./jenkins.war" -d /jenkins/ \
     && unzip "./apache-maven-3.5.4-bin.zip" -d /jenkins/ \
     && unzip "./gradle-3.5.1-bin.zip" -d /jenkins/ \
@@ -37,6 +37,17 @@ RUN wget http://mirrors.jenkins.io/war/latest/jenkins.war \
     && cd /go/src/ \
     && go install golang.org/x/text \
     && go install google.golang.org/grpc \
+    && git clone https://github.com/census-instrumentation/opencensus-go /go/src/go.opencensus.io \
+    && go get -v github.com/apache/thrift/lib/go/thrift github.com/fatih/color github.com/gogo/protobuf/proto github.com/hashicorp/go-multierror github.com/hashicorp/golang-lru github.com/influxdata/influxdb1-client github.com/juju/ratelimit github.com/julienschmidt/httprouter github.com/kavu/go_reuseport github.com/opentracing/opentracing-go github.com/opentracing/opentracing-go/ext github.com/opentracing/opentracing-go/log github.com/rubyist/circuitbreaker github.com/soheilhy/cmux github.com/valyala/fastrand github.com/vmihailenco/msgpack go.opencensus.io/trace \
+    && go get -u -v github.com/smallnest/rpcx/... \
+    && cd \
+    && wget https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz \
+    && tar zxvf ./go1.11.5.linux-amd64.tar.gz \
+    && mv ./go /usr/local/go \
+    && rm -rf ./go1.11.5.linux-amd64.tar.gz \
+    && ldd /usr/local/go/bin/go \
+    && ldd /usr/local/go/bin/godoc \
+    && export GOROOT=/usr/local/go \
     && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 WORKDIR /var/jenkins_home
 ENV LANG zh_CN.UTF-8
@@ -48,7 +59,7 @@ ENV NODE_PATH /usr/lib/node_modules
 ENV GOOS linux
 ENV GOARCH amd64
 ENV GIN_MODE release
-ENV GOROOT /usr/bin
+ENV GOROOT /usr/local/go
 ENV GOPATH /go
 EXPOSE 8080
 
