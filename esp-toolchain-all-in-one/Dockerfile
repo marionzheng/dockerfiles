@@ -29,7 +29,6 @@ ENV PATH /esp/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
 RUN git clone --recursive https://github.com/Superhouse/esp-open-rtos.git /esp/esp-open-rtos
 
 RUN mkdir -p /esp/project && \
-    cp -rf /esp/esp-open-rtos/examples/Makefile /esp/ && \
-    cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    cp -rf /esp/esp-open-rtos/examples/Makefile /esp/
 
 WORKDIR /esp/project
