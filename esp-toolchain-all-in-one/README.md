@@ -1,0 +1,1 @@
+> docker run --rm -it -v $HOME/Documents/project/wph/esp_test/:/home/esp/project ccr.ccs.tencentyun.com/wanpinghui/esp-tollchain-all-in-one /bin/sh /home/esp/project/app/gen_misc.sh
