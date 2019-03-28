@@ -16,13 +16,14 @@ RUN useradd -d /home/esp -m esp && \
 
 USER esp
 
-COPY ./esp-toolchain-all-in-one/xtensa-lx106-elf.tar.bz2 /
-RUN cp xtensa-lx106-elf.tar.bz2 /home/esp/ && \
-    cd /home/esp/ && \
+COPY ./esp-toolchain-all-in-one/xtensa-lx106-elf.tar.bz2 /home/esp/
+COPY ./esp-toolchain-all-in-one/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz /home/esp/
+RUN cd /home/esp/ && \
     tar -jxvf xtensa-lx106-elf.tar.bz2 && \
-    rm -rf xtensa-lx106-elf.tar.bz2
+    tar -jxvf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz  && \
+    rm -rf xtensa-lx106-elf.tar.bz2 xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
 
-ENV PATH "/home/esp/xtensa-lx106-elf/bin:$PATH"
+ENV PATH "/home/esp/xtensa-lx106-elf/bin:/home/esp/xtensa-esp32-elf/bin:$PATH"
 
 # Get the esp-open-sdk
 #RUN git clone --recursive https://github.com/pfalcon/esp-open-sdk.git /home/esp/esp-open-sdk
