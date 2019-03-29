@@ -3,7 +3,7 @@ MAINTAINER marion "zhengyi@wanpinghui.com"
 
 RUN dpkg --add-architecture i386 \
     && apt-get -qq update \
-    && apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python-dev python python-serial sed git unzip bash help2man wget bzip2 vim picocom libc6:i386 \
+    && apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf libncurses-dev flex bison texinfo gawk ncurses-dev libexpat-dev python-dev python python-pip python-setuptools python-serial python-pyparsing libxml2-dev libxslt1-dev zlib1g-dev libffi-dev libssl-dev sed git unzip bash help2man wget bzip2 vim picocom libc6:i386 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -20,8 +20,9 @@ COPY ./esp-toolchain-all-in-one/xtensa-lx106-elf.tar.bz2 /home/esp/
 COPY ./esp-toolchain-all-in-one/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz /home/esp/
 RUN cd /home/esp/ && \
     tar -jxvf xtensa-lx106-elf.tar.bz2 && \
-    tar -jxvf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz  && \
-    rm -rf xtensa-lx106-elf.tar.bz2 xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+    tar -zxvf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz && \
+    rm -rf xtensa-lx106-elf.tar.bz2 && \
+    rm -rf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
 
 ENV PATH "/home/esp/xtensa-lx106-elf/bin:/home/esp/xtensa-esp32-elf/bin:$PATH"
 
