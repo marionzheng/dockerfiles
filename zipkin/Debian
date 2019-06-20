@@ -11,3 +11,6 @@ ENV AUTHORIZED_KEYS **None**
 #安装相关工具
 RUN apt-get update && apt-get install net-tools
 RUN apt-get update && apt-get install vim -y
+
+EXPOSE 9415
+EXPOSE 9416
