@@ -1,4 +1,4 @@
-FROM ccr.ccs.tencentyun.com/wanpinghui/alpine
+FROM ccr.ccs.tencentyun.com/aionnect/alpine
 
 WORKDIR /root/
 RUN wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
