@@ -19,7 +19,7 @@ FROM registry.cn-beijing.aliyuncs.com/shyapp/alpine-ffmpeg
 ENV GIN_MODE release
 RUN mkdir -p /opt/go_live /log/go_live
 WORKDIR /opt/go_live
-COPY --from=builder /root//src/git.wangyangming.org.cn/meeting20/service/go_live/bin .
+COPY --from=builder /root/src/git.wangyangming.org.cn/meeting20/service/go_live/bin .
 RUN chmod a+x ./go_live
 EXPOSE 8083
 EXPOSE 50053
