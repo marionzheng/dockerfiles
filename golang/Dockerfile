@@ -144,6 +144,5 @@ RUN git clone https://github.com/golang/net.git $GOPATH/src/golang.org/x/net \
     && go get -v github.com/apache/thrift/lib/go/thrift github.com/fatih/color github.com/gogo/protobuf/proto github.com/hashicorp/go-multierror github.com/hashicorp/golang-lru github.com/influxdata/influxdb1-client github.com/juju/ratelimit github.com/julienschmidt/httprouter github.com/kavu/go_reuseport github.com/opentracing/opentracing-go github.com/opentracing/opentracing-go/ext github.com/opentracing/opentracing-go/log github.com/rubyist/circuitbreaker github.com/soheilhy/cmux github.com/valyala/fastrand github.com/vmihailenco/msgpack go.opencensus.io/trace \
     && go get -u -v github.com/smallnest/rpcx/...
 ENV LANG zh_CN.UTF-8
-ENV PATH $PATH:/sbin
 
 CMD ["/bin/bash"]
