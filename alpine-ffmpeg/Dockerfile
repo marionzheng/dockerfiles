@@ -10,8 +10,7 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repo
     && mkdir ./ffmpeg-linux \
     && tar -xvJf ffmpeg-release-amd64-static.tar.xz --strip-components 1 -C ./ffmpeg-linux \
     && mv ./ffmpeg-linux/ffmpeg /usr/local/bin/ \
-    && rm -rf ./ffmpeg* \
-    && echo -ne "alpine linux with ffmpeg latest image." >> /root/.built
+    && rm -rf ./ffmpeg*
 ENV LANG zh_CN.UTF-8
 ENV PATH $PATH:/sbin
 
