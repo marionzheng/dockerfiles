@@ -1,6 +1,6 @@
-FROM ccr.ccs.tencentyun.com/aionnect/alpine
+FROM alpine
+MAINTAINER marion "zhengyi@wanpinghui.com"
 
-WORKDIR /root/
 RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \
     && apk --update add curl tcpdump strace bash tree tzdata tini \
