@@ -107,7 +107,7 @@ RUN git clone https://github.com/golang/net.git $GOPATH/src/golang.org/x/net \
     && git clone https://github.com/go-sql-driver/mysql.git $GOPATH/src/github.com/go-sql-driver/mysql \
     && git clone https://github.com/ugorji/go.git $GOPATH/src/github.com/ugorji/go \
     && git clone https://github.com/robfig/cron.git $GOPATH/src/github.com/robfig/cron \
-    && git clone https://github.com/cbroglie/mustache/spec.git $GOPATH/src/github.com/cbroglie/mustache/spec \
+    && git clone https://github.com/mustache/spec.git $GOPATH/src/github.com/mustache/spec \
     && git clone https://github.com/cbroglie/mustache.git $GOPATH/src/github.com/cbroglie/mustache \
     && git clone https://github.com/jcmturner/gofork.git $GOPATH/src/github.com/jcmturner/gofork \
     && git clone https://github.com/swaggo/gin-swagger.git $GOPATH/src/github.com/swaggo/gin-swagger \
