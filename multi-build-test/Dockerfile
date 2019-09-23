@@ -6,7 +6,7 @@ RUN mkdir -p ./src/git.wanpinghui/WPH \
     && git clone -b meeting-master http://git.wanpinghui.com/WPH/go_common.git --depth=1 ./src/git.wanpinghui/WPH/go_common \
     && git clone -b master http://xuwc:blessing@git.wangyangming.org.cn/meeting20/entity.git --depth=1 ./src/git.wangyangming.org.cn/meeting20/entity \
     && git clone -b master_2.0_im http://xuwc:blessing@git.wangyangming.org.cn/meeting20/service/go_live.git --depth=1 ./src/git.wangyangming.org.cn/meeting20/service/go_live \
-    && export $GOPATH = "$GOPATH:/root/" \
+    && export GOPATH="$GOPATH:/root/" \
     && cd ./src/git.wangyangming.org.cn/meeting20/service/go_live \
     && go get -v \
     && mkdir -p ./bin \
