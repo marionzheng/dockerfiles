@@ -11,7 +11,6 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.11/main/" > /etc/apk/rep
     && unzip -o -d /usr/share/fonts/ simsun.zip \
     && rm -rf simsun.zip \
     && chmod -R 755 /usr/share/fonts/ \
-    && rm -rf /var/cache/apk/* \
     && fc-cache -f -v
 ENV LANG zh_CN.UTF-8
 ENV PATH $PATH:/sbin
