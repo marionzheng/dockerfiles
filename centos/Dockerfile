@@ -4,7 +4,7 @@ MAINTAINER marion "marion@aionnect.com"
 ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini /sbin/tini
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
     && yum update -y \
-    && yum -y install tcpdump strace tree nscd.service \
+    && yum -y install tcpdump strace tree nscd \
     && chmod +x /sbin/tini \
     && systemctl enable nscd.service \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
