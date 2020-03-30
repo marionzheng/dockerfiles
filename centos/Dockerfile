@@ -10,4 +10,4 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
 ENV LANG zh_CN.UTF-8
 ENV PATH $PATH:/sbin
 
-CMD ["systemctl", "start", "nscd;", "/bin/bash"]
+CMD ["systemctl", "start", "nscd;", "bash"]
