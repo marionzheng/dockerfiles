@@ -6,7 +6,7 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
     && yum update -y \
     && yum -y install tcpdump strace tree nscd \
     && chmod +x /sbin/tini \
-    && systemctl enable nscd \
+    && systemctl enable nscd.service \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV LANG zh_CN.UTF-8
 ENV PATH $PATH:/sbin
