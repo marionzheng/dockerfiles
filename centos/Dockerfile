@@ -11,5 +11,5 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
 ENV LANG zh_CN.UTF-8
 ENV PATH $PATH:/sbin
 
-ENTRYPOINT ["/usr/sbin/init;", "tini", "--"]
+ENTRYPOINT ["/usr/sbin/init", "&&", "tini", "--"]
 CMD ["bash"]
