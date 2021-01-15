@@ -1,5 +1,5 @@
 FROM alpine
-MAINTAINER marion "zhengyi@wanpinghui.com"
+MAINTAINER marion "marion@aionnect.com"
 
 # /etc/supervisord.conf -> /conf/supervisor/*.ini -> application config
 #

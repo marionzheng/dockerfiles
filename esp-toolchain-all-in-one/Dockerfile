@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER marion "zhengyi@wanpinghui.com"
+MAINTAINER marion "marion@aionnect.com"
 
 RUN dpkg --add-architecture i386 \
     && apt-get -qq update \

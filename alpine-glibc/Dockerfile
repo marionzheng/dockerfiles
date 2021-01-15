@@ -1,5 +1,5 @@
 FROM alpine:3.11
-MAINTAINER marion "zhengyi@wanpinghui.com"
+MAINTAINER marion "marion@aionnect.com"
 
 ADD ./glibc-2.31-r0.apk /
 RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.11/main/" > /etc/apk/repositories \

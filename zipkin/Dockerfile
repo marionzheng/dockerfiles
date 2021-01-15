@@ -1,5 +1,5 @@
 FROM openzipkin/zipkin
-MAINTAINER marion "zhengyi@wanpinghui.com"
+MAINTAINER marion "marion@aionnect.com"
 
 RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/main/" > /etc/apk/repositories \
     && echo -ne "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.8/community/" >> /etc/apk/repositories \

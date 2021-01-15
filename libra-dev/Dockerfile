@@ -1,5 +1,5 @@
 FROM centos
-MAINTAINER marion "zhengyi@wanpinghui.com"
+MAINTAINER marion "marion@aionnect.com"
 
 WORKDIR /root/
 RUN rpm -Uvh https://mirrors.ustc.edu.cn/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm \
