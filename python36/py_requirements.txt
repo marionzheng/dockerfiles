@@ -52,7 +52,7 @@ grequests==0.3.0
 celery==4.0.2
 pandas==0.20.3
 python-alipay-sdk==1.2.1
-Pillow==4.2.1
+Pillow==8.1.1
 qrcode==5.3
 xlrd==1.0.0
 xlwt==1.2.0
