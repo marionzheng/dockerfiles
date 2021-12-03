@@ -1,0 +1,39 @@
+echo "打印构建信息"
+
+sh "export"
+
+env.START_TIME = Calendar.getInstance().getTime().format("yyyy-MM-dd HH:mm:ss",TimeZone.getTimeZone("GMT+8:00"))
+env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+env.GIT_COMMIT_EMAIL = sh (script: 'git show -s --pretty=%ae ${GIT_COMMIT}', returnStdout: true).trim()
+env.ROBOT_ID = "bf25c4c5-9dfa-4207-8cb2-9efa3fdf500d"
+env.GIT_DOMAIN = "https://ctgit.szctjt.cn"
+
+env.IMAGE_TAG = Calendar.getInstance().getTime().format("yyyyMMdd-HHmmss",TimeZone.getTimeZone("GMT+8:00")) + "-" + env.GIT_COMMIT.substring(0, 8) 
+env.ENV = "master"
+
+if (env.BRANCH_NAME.startsWith("dev-") || env.BRANCH_NAME == "dev") {
+    env.ENV = "dev"
+}
+if (env.BRANCH_NAME.startsWith("test-") || env.BRANCH_NAME == "test") {
+    env.ENV = "test"
+}
+if (env.BRANCH_NAME.startsWith("uat-") || env.BRANCH_NAME == "uat") {
+    env.ENV = "uat"
+}
+if (env.BRANCH_NAME.startsWith("release-") || env.BRANCH_NAME == "release") {
+    currentBuild.result = 'ABORTED'
+    error('release 分支应通过 git tag 部署')
+}
+if (env.BRANCH_NAME == env.TAG_NAME) {
+    env.ENV = "release"
+    env.IMAGE_TAG = env.TAG_NAME
+    echo "当前TAG：" + env.TAG_NAME
+}
+else {
+    echo "当前分支：" + env.BRANCH_NAME
+}
+echo "当前环境：" + env.ENV
+echo "当前提交：" + env.GIT_COMMIT
+echo "宿主机工作目录：" + env.WORKSPACE_ON_HOST
+echo "容器工作目录：" + env.WORKSPACE
+echo "镜像名称：" + env.IMAGE_NAME + ":" + env.IMAGE_TAG

@@ -1,0 +1,95 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {service-name}
+    service: {service-name}
+  name: {service-name}
+  namespace: {env}
+spec:
+  ports:
+    - name: http
+      port: {http-port}
+      protocol: TCP
+      targetPort: {http-port}
+    - name: grpc
+      port: {grpc-port}
+      protocol: TCP
+      targetPort: {grpc-port}
+  selector:
+    app: {service-name}
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {service-name}
+    version: v1
+  name: {service-name}
+  namespace: {env}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: {service-name}
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: {service-name}
+        version: v1
+        programming_language: {programming_language}
+    spec:
+      containers:
+        - image: {image-name}:{image-tag}
+          imagePullPolicy: IfNotPresent
+          name: {service-name}
+          resources:
+            limits:
+              cpu: 800m
+              memory: 1024Mi
+            requests:
+              cpu: '0'
+              memory: '0'
+          securityContext:
+            privileged: false
+          terminationMessagePath: /release/termination-log
+          volumeMounts:
+            - mountPath: /opt/{service-name}/conf
+              name: main-config
+            - mountPath: /etc/localtime
+              name: volume-{env}-{service-name}
+          workingDir: /opt/{service-name}
+      initContainers:
+        - image: busybox
+          command:
+            - sh
+            - -c
+            - echo 65535 > /proc/sys/net/core/somaxconn
+          imagePullPolicy: Always
+          name: setsysctl
+          securityContext:
+            privileged: true
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: acr-credential-560b66540f01e51c18524b09ad7f575f
+        - name: acr-credential-5dee66918cdf5d93de4aa5cd90247f73
+        - name: acr-credential-6731ef77d88edc24b279ebf20860f30f
+        - name: acr-credential-bab42ef118a2913b05cd8cdb95441d70
+        - name: acr-credential-be55512166dd26eda658d0706de5a06a
+        - name: harbor-internal
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: {service-name}-conf
+          name: main-config
+        - hostPath:
+            path: /etc/localtime
+            type: ''
+          name: volume-{env}-{service-name}

@@ -1,0 +1,11 @@
+echo "开始 sonar 代码扫描"
+
+if (env.ENV == "dev") {
+    sh "docker run --rm \
+        -e SONAR_HOST_URL=http://192.168.9.94:9000 \
+        -e SONAR_LOGIN=f8c1b642684acca7f62952b27d5646cfd91b7863 \
+        -v ${env.WORKSPACE_ON_HOST}:/usr/src \
+        sonarsource/sonar-scanner-cli"
+} else {
+  echo "仅扫描 dev 分支"    
+}

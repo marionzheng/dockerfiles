@@ -1,0 +1,9 @@
+echo "开始构建"
+sh "chmod +x ./build.sh"
+sh "docker run --rm -i \
+    --add-host=ctgit.szctjt.cn:10.9.17.49 \
+    -v /go:/go \
+    -v ${env.WORKSPACE_ON_HOST}:/workspace \
+    -v /root/.ssh/id_ed25519:/root/.ssh/id_ed25519 \
+    registry.cn-shenzhen.aliyuncs.com/szcttech/golang-ci:1.16 \
+    /workspace/build.sh"
