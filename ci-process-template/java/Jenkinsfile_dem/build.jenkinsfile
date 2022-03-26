@@ -1,0 +1,8 @@
+echo "开始构建"
+sh "chmod +x ./build.sh"
+sh "docker run --rm -i \
+    -v /root/.m2:/root/.m2 \
+    -v /gradle/repository:/gradle/repository \
+    -v ${env.WORKSPACE_ON_HOST}:/workspace \
+    registry.cn-shenzhen.aliyuncs.com/szcttech/java-ci:8u291 \
+    /workspace/build.sh"

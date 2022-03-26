@@ -1,0 +1,39 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {service-name}-route
+  namespace: {env}
+spec:
+  gateways:
+    - default-gateway
+  hosts:
+    - dev.aicar365.com
+    - www.dev.aicar365.com
+    - dev.aicar24.com
+    - www.dev.aicar24.com
+  http:
+    - corsPolicy:
+        allowCredentials: false
+        allowHeaders:
+          - content-type
+          - authorization
+        allowMethods:
+          - POST
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+          - OPTIONS
+        allowOrigins:
+          - exact: '*'
+        maxAge: 24h
+      match:
+        - uri:
+            prefix: /auth/
+      route:
+        - destination:
+            host: {service-name}
+            port:
+              number: 8082

@@ -1,0 +1,26 @@
+echo "开始接口自动化测试"
+
+if (env.ENV == "test") {
+    echo "休眠1分钟，确保程序新版本已正常运行"
+    sh "sleep 1m"
+    sh "docker run --rm -i -v ${env.WORKSPACE_ON_HOST}/test/api:/etc/newman \
+        --entrypoint sh postman/newman:alpine -c \
+        'npm i -g newman-reporter-html; \
+        newman run collection.json \
+        --suppress-exit-code 1 \
+        --color off \
+        --reporters cli,html\
+        --reporter-html-export api_report.html \
+        --environment=environment.json'"
+    publishHTML target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: false,
+        keepAll: true,
+        reportDir: 'test/api',
+        reportFiles: 'api_report.html',
+        reportName: 'APIReport'
+    ]
+}
+else {
+  echo "仅需要在测试环境进行接口自动化测试"    
+}
